@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+    {% block content %}
+
+    <h4 class="index-h4">
+        {% for message in messages%}
+        {{ message }}
+        {% endfor %}
+    </h4>
+
+    <h3>Online Mode: Manually fill the required form to generate prediction</h3>
+    <div class="form_b ">
+        <form action="get_prediction" method="POST" id="form_b" onsubmit="required()" name="form_b" >
+            {% csrf_token %}
+            <div class="form-group row">
+                <label>Select Machine Learning Model</label>
+                <select name="models">
+                    <option value="dct">Decision Tree</option>
+                </select>
+            </div>
+
+            <div class="form-group row">
+                <label for="AGE" class="col-sm-6 col-form-label"><b>AGE</b> (Proportion of owner-occupied units built prior to 1940)</label>
+                <div class="col-sm-6">
+                    <input type="number" name="AGE" id="AGE" step="any" style="margin-bottom:3%;">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="INDUS" class="col-sm-6 col-form-label"><b>INDUS</b> (Proportion of non-retail business acres per town)</label>
+                <div class="col-sm-6">
+                    <input type="number" name="INDUS" id="INDUS" step="any" style="margin-bottom:3%;">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="LSTAT" class="col-sm-6 col-form-label"><b>LSTAT</b> (Percentage lower status of the population)</label>
+                <div class="col-sm-6">
+                    <input type="number" name="LSTAT" id="LSTAT" step="any" style="margin-bottom:3%;">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="NOX" class="col-sm-6 col-form-label"><b>NOX</b> (Nitric oxides concentration (parts per 10 million)</label>
+                <div class="col-sm-6">
+                    <input type="number" name="NOX" id="NOX" step="any" style="margin-bottom:3%;">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="PTRATIO" class="col-sm-6 col-form-label"><b>PTRATIO</b> (Pupil-teacher ratio by town)</label>
+                <div class="col-sm-6">
+                    <input type="number" name="PTRATIO" id="PTRATIO" step="any" style="margin-bottom:3%;">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="RAD" class="col-sm-6 col-form-label"><b>RAD</b> (Index of accessibility to radial highways)</label>
+                <div class="col-sm-6">
+                    <input type="number" name="RAD" id="RAD" step="any" style="margin-bottom:3%;">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="RM" class="col-sm-6 col-form-label"><b>RM</b> (Average number of rooms per dwelling)</label>
+                <div class="col-sm-6">
+                    <input type="number" name="RM" id="RM" step="any" style="margin-bottom:3%;">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="TAX" class="col-sm-6 col-form-label"><b>TAX</b> (Full-value property-tax rate per $10,000)</label>
+                <div class="col-sm-6">
+                    <input type="number" name="TAX" id="TAX" step="any" style="margin-bottom:3%;">
+                </div>
+            </div>
+
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Run Prediction" class="btn btn-primary" onclick="submit()" >
+            </div>
+
+        </form>
+    </div>
+
+    <div>
+        <div class="col-md-12 text-center">
+            <h3 id="prediction"> Prediction Result: {{prediction}} </h3>
+        </div>
+    </div>
+
+
+    {% endblock %}
